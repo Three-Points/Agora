@@ -4,6 +4,7 @@
     "description": "A Little Blog Post",
     "main": "./src/index.js",
     "scripts": {
+        "lint": "npx prettier --write .",
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview --port 8080",
@@ -14,7 +15,10 @@
         "react-dom": "17.0.2"
     },
     "devDependencies": {
+        "@commitlint/cli": "16.2.3",
+        "@commitlint/config-conventional": "16.2.1",
         "@vitejs/plugin-react": "1.0.7",
+        "husky": "7.0.4",
         "vite": "2.8.0"
     },
     "repository": "git@github.com:Three-Points/Agora.git",
@@ -24,5 +28,55 @@
         "tabWidth": 4,
         "semi": false,
         "singleQuote": true
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ],
+        "parserPreset": "conventional-changelog-conventionalcommits",
+        "rules": {
+            "type-case": [
+                2,
+                "always",
+                "lower-case"
+            ],
+            "type-empty": [
+                2,
+                "never"
+            ],
+            "type-enum": [
+                2,
+                "always",
+                [
+                    "feat",
+                    "fix",
+                    "docs",
+                    "style",
+                    "refactor",
+                    "test",
+                    "ci",
+                    "work",
+                    "chore",
+                    "remove"
+                ]
+            ],
+            "scope-empty": [
+                0
+            ],
+            "subject-case": [
+                2,
+                "always",
+                "lower-case"
+            ],
+            "subject-empty": [
+                2,
+                "never"
+            ],
+            "subject-full-stop": [
+                2,
+                "never",
+                "."
+            ]
+        }
     }
 }
