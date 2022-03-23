@@ -1,0 +1,4 @@
+# core directories
+.github/
+.vscode/
+node_modules/
