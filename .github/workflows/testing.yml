@@ -1,6 +1,7 @@
 name: Deploy to GitHub Pages
 on:
-    push:
+    pull_request:
+        types: [closed]
         branches:
             - development
 jobs:
@@ -12,12 +13,7 @@ jobs:
       - name: 🔧 Configure Yarn
         run: |
           npm install -g yarn
-      - name: 📦 Install dependencies
+      - name: 🚧 Launch Tests
         run: |
           yarn install
-          yarn build
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
-        with:
-          branch: gh-pages
-          folder: dist
+          yarn test
