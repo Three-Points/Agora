@@ -5,6 +5,9 @@ import { resolve } from 'path'
 export default defineConfig({
     plugins: [react()],
     base: '/Agora/',
+    optimizeDeps: {
+        include: ['jest-mock'],
+    },
     resolve: {
         alias: {
             '@': resolve(__dirname, '/src'),
@@ -14,9 +17,10 @@ export default defineConfig({
                 __dirname,
                 '/src/components/container'
             ),
-            '@layout': resolve(__dirname, '/src/layout'),
-            '@router': resolve(__dirname, '/src/router'),
+            '@layouts': resolve(__dirname, '/src/layouts'),
+            '@pages': resolve(__dirname, '/src/pages'),
             '@views': resolve(__dirname, '/src/views'),
+            '@utils': resolve(__dirname, '/src/utils'),
         },
     },
 })
