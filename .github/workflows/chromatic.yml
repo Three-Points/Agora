@@ -4,6 +4,8 @@ on:
         branches:
             - development
             - feat/issue-2/ci-cd
+env:
+    CHROMATIC_TOKEN: ${CHROMATIC_TOKEN}
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -15,5 +17,5 @@ jobs:
       - name: 🚀  Publish to Chromatic
         uses: chromaui/action@v1
         with:
-          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+          projectToken: ${CHROMATIC_TOKEN}
           token: ${{ secrets.GITHUB_TOKEN }}
