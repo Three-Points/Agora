@@ -1,6 +1,6 @@
 {
     "name": "agora",
-    "version": "0.0.0",
+    "version": "0.2.0",
     "description": "A Little Blog Post",
     "main": "./src/main.jsx",
     "scripts": {
@@ -10,7 +10,8 @@
         "preview": "vite preview --port 8080",
         "start": "yarn build && yarn preview",
         "storybook": "start-storybook -p 6006 --no-open",
-        "build-storybook": "build-storybook"
+        "build-storybook": "build-storybook",
+        "chromatic": "doppler run --command='npx chromatic --project-token=$CHROMATIC_TOKEN'"
     },
     "dependencies": {
         "react": "17.0.2",

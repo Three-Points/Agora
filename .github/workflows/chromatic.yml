@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy Storybook
 on:
     push:
         branches:
@@ -9,12 +9,12 @@ jobs:
     steps:
       - name: ⚙️  Configure GitHub Actions
         uses: actions/checkout@v3
-      - name: 📦  Install dependencies
-        run: |
-          yarn install
-          yarn build
-      - name: 🚀  Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
-          branch: staging
-          folder: dist
+          fetch-depth: '0'
+      - name: 📦  Install dependencies
+        run: yarn
+      - name: 🚀  Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
