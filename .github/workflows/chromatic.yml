@@ -15,5 +15,5 @@ jobs:
       - name: 🚀  Publish to Chromatic
         uses: chromaui/action@v1
         with:
-          projectToken: ${{ secrets.GITHUB_CHROMATIC_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
