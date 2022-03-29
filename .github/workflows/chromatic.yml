@@ -3,7 +3,6 @@ on:
     push:
         branches:
             - development
-            - feat/issue-2/ci-cd
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
