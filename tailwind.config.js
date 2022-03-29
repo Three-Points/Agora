@@ -11,6 +11,7 @@ module.exports = {
                 soft: '#F2F7F6',
             },
             red: '#F86A61',
+            white: '#FFFFFF',
         },
     },
     plugins: [
