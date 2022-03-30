@@ -1,10 +1,12 @@
 name: Deploy Storybook
 on:
-    push:
-        branches:
-            - development
+    pull_request:
+      types: [opened]
+      branches:
+          - development
 jobs:
-  build-and-deploy:
+  publish-storybook:
+    if: github.event.label.name == 'Design System'
     runs-on: ubuntu-latest
     steps:
       - name: ⚙️  Configure GitHub Actions
