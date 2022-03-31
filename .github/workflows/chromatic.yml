@@ -6,7 +6,7 @@ on:
           - development
 jobs:
   publish-storybook:
-    if: contains( github.event.pull_request.labels.*.name, 'Design System')
+    if: contains(github.event.pull_request.labels.*.name, 'Design System')
     runs-on: ubuntu-latest
     steps:
       - name: ⚙️  Configure GitHub Actions
