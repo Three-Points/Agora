@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/Verion-v0.0.0-EBCB8B?style=for-the-badge" alt="Version" />
+    <img src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=EBCB8B&label=version&prefix=v&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2FThree-Points%2FAgora%2Fdevelopment%2Fpackage.json" alt="Version" />
 </p>
 
 <p align="center">
@@ -18,6 +18,7 @@
 
 The propuse of this project is to create a minimal Single Page Application with ReactJS.
 
+[![Website](https://img.shields.io/badge/Website-ECEFF4?style=for-the-badge&logo=iCloud&logoColor=2E3440)](https://three-points.github.io/Agora/)
 ### Getting Started
 
 #### Installation
