@@ -1,0 +1,224 @@
+openapi: 3.0.0
+info:
+    version: 0.1.0
+    title: Agora
+    license:
+        name: MIT
+        url: 'https://github.com/Three-Points/Agora/blob/development/markdown/license.md'
+    x-logo:
+        url: 'https://raw.githubusercontent.com/Three-Points/Agora/development/src/assets/logo.svg'
+    description: |
+        **About "Agora"**
+
+        The propuse of this project is to create a minimal Single Page Application with ReactJS.
+
+        [![Website](https://img.shields.io/badge/Website-ECEFF4?style=for-the-badge&logo=iCloud&logoColor=2E3440)](https://three-points.github.io/Agora/)
+externalDocs:
+    description: Github project ✨
+    url: 'https://github.com/Three-Points/Agora'
+tags:
+    - name: Author
+      description: Person who write a post in Agora named as AWritter.
+    - name: Post
+      description: Resource created by AWritter.
+servers:
+    - url: 'http://localhost:3000/api'
+      description: Development server
+paths:
+    /posts:
+        get:
+            tags:
+                - Post
+            summary: Get All Posts
+            description: |
+                Return all posts in the database (max. 10 posts).
+            operationId: getPosts
+            parameters:
+                - name: title
+                  in: query
+                  description: Post title
+                  schema:
+                      type: string
+                      example: 'Nordic Mountains'
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    results:
+                                        type: array
+                                        items:
+                                            allOf:
+                                                - $ref: '#/components/schemas/Post'
+                                            example:
+                                                id: 3
+                                                image: https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80
+                                                description: Some quick example to build on the card title and make up the bulk the card's content.
+                                                like: 100
+                                                comments: 15
+                                                author:
+                                                    id: 1
+                                                    username: paeolohiram
+                                                    description: Traveler lover and photographer
+                                                    example: https://randomuser.me/api/portraits/men/32.jpg
+                '400':
+                    $ref: '#/components/responses/NotFound'
+    /post/{id}:
+        patch:
+            tags:
+                - Post
+            summary: Update Post
+            description: |
+                Rank the popularity (like or dislike) of a post.
+            operationId: updatePost
+            parameters:
+                - name: id
+                  in: path
+                  description: Author ID
+                  required: true
+                  schema:
+                      type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                post:
+                                    type: object
+                                    properties:
+                                        like:
+                                            description: Post like or dislike
+                                            type: boolean
+                                            example: true
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    results:
+                                        type: array
+                                        items:
+                                            allOf:
+                                                - $ref: '#/components/schemas/Post'
+                                            example:
+                                                id: 3
+                                                image: https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80
+                                                title: Nordic Mountains
+                                                description: Some quick example to build on the card title and make up the bulk the card's content.
+                                                like: 100
+                                                comments: 15
+                                                author:
+                                                    id: 1
+                                                    username: paeolohiram
+                                                    description: Traveler lover and photographer
+                                                    avatar: https://randomuser.me/api/portraits/men/32.jpg
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+    /author/{id}:
+        get:
+            tags:
+                - Author
+            summary: Get Author by ID
+            description: Find an author by ID.
+            operationId: getAuthor
+            # security:
+            #   - api_key: []
+            parameters:
+                - name: id
+                  in: path
+                  description: Author ID
+                  required: true
+                  schema:
+                      type: number
+                      minimum: 1
+                      example: 2
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                allOf:
+                                    - $ref: '#/components/schemas/Author'
+                                example:
+                                    id: 1
+                                    username: paeolohiram
+                                    description: Traveler lover and photographer
+                                    avatar: https://randomuser.me/api/portraits/men/32.jpg
+                '404':
+                    $ref: '#/components/responses/NotFound'
+components:
+    schemas:
+        Author:
+            type: object
+            properties:
+                id:
+                    description: Author ID
+                    type: integer
+                    minimum: 1
+                username:
+                    type: string
+                    minLength: 4
+                description:
+                    type: string
+                    maxLength: 150
+                avatar:
+                    description: Author avatar image
+                    type: string
+        Post:
+            type: object
+            properties:
+                id:
+                    description: Post ID
+                    type: integer
+                    minimum: 1
+                image:
+                    description: Post image cover
+                    type: string
+                title:
+                    description: Post title
+                    type: string
+                description:
+                    description: Post description
+                    type: string
+                likes:
+                    description: Number of likes
+                    type: integer
+                    minimum: 0
+                comments:
+                    description: Number of comments
+                    type: integer
+                    minimum: 0
+                author:
+                    description: Author
+                    allOf:
+                        - $ref: '#/components/schemas/Author'
+    # securitySchemes:
+    #   api_key:
+    #     type: apiKey
+    #     in: header
+    #     name: api_key
+    responses:
+        NotFound:
+            description: The specified resource was not found
+            content:
+                application/json:
+                    schema:
+                        type: string
+                        example: Resource not found
+        BadRequest:
+            description: The specified resource was bad request
+            content:
+                application/json:
+                    schema:
+                        type: string
+                        example: Bad request
