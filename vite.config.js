@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
     plugins: [react()],
-    base: '/Agora/',
+    base: '/Agora',
     optimizeDeps: {
         include: ['jest-mock'],
     },
@@ -17,15 +17,12 @@ export default defineConfig({
                 __dirname,
                 '/src/components/container'
             ),
+            '@controllers': resolve(__dirname, '/src/controllers'),
             '@layouts': resolve(__dirname, '/src/layouts'),
+            '@services': resolve(__dirname, '/src/services'),
+            '@server': resolve(__dirname, '/src/server'),
             '@pages': resolve(__dirname, '/src/pages'),
             '@views': resolve(__dirname, '/src/views'),
-            '@utils': resolve(__dirname, '/src/utils'),
         },
     },
-    // server: {
-    //     hmr: {
-    //         overlay: false,
-    //     },
-    // },
 })

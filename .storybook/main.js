@@ -12,7 +12,7 @@ module.exports = {
     ],
     framework: '@storybook/react',
     core: {
-        builder: 'storybook-builder-vite',
+        builder: '@storybook/builder-vite',
     },
     async viteFinal(config) {
         config.resolve.alias = {
@@ -23,9 +23,12 @@ module.exports = {
                 __dirname,
                 '../src/components/container'
             ),
+            '@controllers': resolve(__dirname, '../src/controllers'),
             '@layouts': resolve(__dirname, '../src/layouts'),
+            '@services': resolve(__dirname, '../src/services'),
+            '@server': resolve(__dirname, '../src/server'),
             '@pages': resolve(__dirname, '../src/pages'),
-            '@utils': resolve(__dirname, '../src/utils'),
+            '@views': resolve(__dirname, '../src/views'),
         }
         return config
     },
