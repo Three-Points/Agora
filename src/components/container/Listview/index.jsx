@@ -1,62 +1,30 @@
+import Loader from '@baseComponents/Loader/index'
 import Card from '@containerComponents/Card/index'
 
 const listview = `grid gap-6 grid-cols-1
                     sm:grid-cols-2 xl:grid-cols-3`
 
-const posts = [
-    {
-        image: 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
-        autor: 'Paeolo Hiram',
-        publishAt: 'Mar 21 (3 minutes ago)',
-        description:
-            "Some quick example to build on the card title and make up the bulk the card's content.",
-        comments: 15,
-        likes: 4300,
-    },
-    {
-        image: 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
-        autor: 'Paeolo Hiram',
-        publishAt: 'Mar 21 (3 minutes ago)',
-        description:
-            "Some quick example to build on the card title and make up the bulk the card's content.",
-        comments: 15,
-        likes: 4300,
-    },
-    {
-        image: 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
-        autor: 'Paeolo Hiram',
-        publishAt: 'Mar 21 (3 minutes ago)',
-        description:
-            "Some quick example to build on the card title and make up the bulk the card's content.",
-        comments: 15,
-        likes: 4300,
-    },
-    {
-        image: 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
-        autor: 'Paeolo Hiram',
-        publishAt: 'Mar 21 (3 minutes ago)',
-        description:
-            "Some quick example to build on the card title and make up the bulk the card's content.",
-        comments: 15,
-        likes: 4300,
-    },
-    {
-        image: '',
-        autor: 'Paeolo Hiram',
-        publishAt: 'Mar 21 (3 minutes ago)',
-        description:
-            "Some quick example to build on the card title and make up the bulk the card's content.",
-        comments: 15,
-        likes: 4300,
-    },
-]
+const no_content = `fixed inset-0 z-10
+                flex flex-col justify-center items-center`
+const no_content_container = `flex flex-col`
+const no_content_text = `text-primary-bold font-normal text-2xl`
 
-export default () => {
-    return (
-        <div className={listview}>
-            {posts.map((post, index) => (
-                <Card key={index} {...post} />
-            ))}
+const notContent = (
+    <div className={no_content}>
+        <div className={no_content_container}>
+            <span className={no_content_text}>No posts found</span>
         </div>
-    )
+    </div>
+)
+
+export default ({ posts, loading }) => {
+    const renderPosts = () => {
+        if (loading) return <Loader />
+        if (!posts.length) return notContent
+        return posts.map((post, index) => {
+            return <Card key={index} {...post} />
+        })
+    }
+
+    return <div className={listview}>{renderPosts()}</div>
 }

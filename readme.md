@@ -11,7 +11,7 @@
 <p align="center">
     <img src="https://img.shields.io/badge/v14.X-ECEFF4?style=for-the-badge&logo=Node.js" alt="NodeJS" />
     <img src="https://img.shields.io/badge/v7.X-ECEFF4?style=for-the-badge&logo=npm" alt="npm" />
-    <img src="https://img.shields.io/badge/supported-A7C9E6?style=for-the-badge&logo=Typescript" alt="Typescript" />
+    <img src="https://img.shields.io/badge/supported-70481A?style=for-the-badge&logo=Javascript" alt="Javascript" />
 </p>
 
 ## About "Agora"
@@ -19,6 +19,7 @@
 The propuse of this project is to create a minimal Single Page Application with ReactJS.
 
 [![Website](https://img.shields.io/badge/Website-ECEFF4?style=for-the-badge&logo=iCloud&logoColor=2E3440)](https://three-points.github.io/Agora/)
+
 ### Getting Started
 
 #### Installation

@@ -6,8 +6,11 @@
             "@assets/*": ["./src/assets/*"],
             "@baseComponents/*": ["./src/components/base/*"],
             "@containerComponents/*": ["./src/components/container/*"],
-            "@layout/*": ["./src/layout/*"],
-            "@router/*": ["./src/router/*"],
+            "@controllers/*": ["./src/controllers/*"],
+            "@layouts/*": ["./src/layouts/*"],
+            "@services/*": ["./src/services/*"],
+            "@server/*": ["./src/server/*"],
+            "@pages/*": ["./src/pages/*"],
             "@views/*": ["./src/views/*"]
         }
     }

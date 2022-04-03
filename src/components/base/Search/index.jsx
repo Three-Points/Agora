@@ -5,8 +5,13 @@ const search_input = `p-2
                     text-primary
                     col-span-2`
 
-export default () => (
+export default ({ handleSearch }) => (
     <div className={search}>
-        <input className={search_input} type={'text'} placeholder="Search" />
+        <input
+            className={search_input}
+            type={'text'}
+            placeholder="Search"
+            onKeyUp={handleSearch}
+        />
     </div>
 )
