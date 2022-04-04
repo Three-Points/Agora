@@ -1,15 +1,17 @@
-import Heart from '@assets/icons/heart.svg'
 import { useState } from 'react'
+import Heart from '@assets/icons/heart.svg'
+import { updatePost } from '@services/post.service'
 
 const button = `w-[75px] p-3
                 grid grid-flow-col place-items-center gap-x-1
                 text-white
                 bg-red rounded-md`
 
-export default ({ likesCount = 0 }) => {
+export default ({ postID, likesCount = 0 }) => {
     const [count, setCount] = useState(likesCount)
-    const handleLikes = () => {
-        setCount(count + 1)
+    const handleLikes = async () => {
+        const post = await updatePost(postID)
+        setCount(post?.likes)
     }
 
     return (
