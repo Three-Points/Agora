@@ -1,3 +1,4 @@
+import { MemoryRouter } from 'react-router-dom'
 import Navbar from '.'
 
 export default {
@@ -5,4 +6,8 @@ export default {
     component: Navbar,
 }
 
-export const Default = () => <Navbar />
+export const Default = () => (
+    <MemoryRouter>
+        <Navbar />
+    </MemoryRouter>
+)
