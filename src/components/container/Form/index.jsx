@@ -1,5 +1,8 @@
 import { useState } from 'react'
+
 import Logo from '@assets/logo.svg'
+
+import { authentication } from '@services/author.service'
 
 const form = `
             w-full h-screen
@@ -9,8 +12,8 @@ const form_title = `mb-9
                     flex flex-col items-center
                     text-2xl text-center text-primary-bold`
 const field = `flex flex-col`
-const field_label = `text-primary mb-1.5`
-const field_input = `p-2
+const field_label = `text-primary flex flex-col`
+const field_input = `p-2 mt-1.5
                     rounded-lg border-2 border-primary
                     outline-none
                     text-primary`
@@ -24,11 +27,25 @@ const message_error = `p-2 mt-9
                     bg-red-light`
 
 export default () => {
+    const [login, setLogin] = useState({
+        username: '',
+        password: '',
+    })
     const [isError, setIsError] = useState(false)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('submit')
+        if (login.username && login.password) {
+            const response = await authentication(login)
+            if (response?.errors) {
+                setIsError(true)
+            } else {
+                debugger
+                setIsError(false)
+                localStorage.setItem('token', response?.token)
+                window.location.href = '/'
+            }
+        }
     }
     return (
         <div className={form}>
@@ -36,41 +53,56 @@ export default () => {
                 <img src={Logo} alt="Logo" width="75" />
                 <span>Welcome to Agora</span>
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className={field}>
-                    <label htmlFor="name" className={field_label}>
-                        Email
+                    <label className={field_label}>
+                        Username
+                        <input
+                            type="text"
+                            name="username"
+                            className={field_input}
+                            minLength={3}
+                            maxLength={50}
+                            required
+                            value={login.username}
+                            onChange={(e) =>
+                                setLogin({ ...login, username: e.target.value })
+                            }
+                        />
                     </label>
-                    <input
-                        type="email"
-                        name="name"
-                        className={field_input}
-                        minLength={3}
-                        maxLength={50}
-                        required
-                    />
                 </div>
                 <div className={field}>
-                    <label htmlFor="name" className={field_label}>
-                        password
+                    <label className={field_label}>
+                        Password
+                        <input
+                            type="password"
+                            name="password"
+                            className={field_input}
+                            minLength={6}
+                            maxLength={50}
+                            required
+                            value={login.password}
+                            onChange={(e) =>
+                                setLogin({ ...login, password: e.target.value })
+                            }
+                        />
                     </label>
-                    <input
-                        type="password"
-                        name="name"
-                        className={field_input}
-                        minLength={6}
-                        maxLength={50}
-                    />
                 </div>
-                <button type="submit" className={form_button}>
+                <button
+                    type="submit"
+                    className={form_button}
+                    onClick={handleSubmit}
+                >
                     Login
                 </button>
             </form>
-            <div
-                className={`${message_error} ${isError ? 'visible' : 'hidden'}`}
-            >
-                Invalid email or password
-            </div>
+            {isError && (
+                <div className={message_error}>
+                    <span>
+                        Username or password is incorrect. Please try again.
+                    </span>
+                </div>
+            )}
         </div>
     )
 }

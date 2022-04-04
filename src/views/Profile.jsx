@@ -20,7 +20,7 @@ export default () => {
     return (
         <>
             <Navbar />
-            {loading ? <Loader /> : <Profile profile={profile} />}
+            {loading ? <Loader /> : <Profile {...profile} />}
         </>
     )
 }

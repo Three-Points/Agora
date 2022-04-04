@@ -1,4 +1,11 @@
-import { belongsTo, createServer, hasMany, Model, Serializer } from 'miragejs'
+import {
+    belongsTo,
+    createServer,
+    hasMany,
+    Model,
+    Serializer,
+    Response,
+} from 'miragejs'
 
 import authors from './mocks/author.mock'
 import posts from './mocks/post.mock'
@@ -39,6 +46,30 @@ export default function ({ environment }) {
             this.get('/api/author/:id', ({ authors }, { params }) => {
                 const { id: authorID } = params
                 return authors.find(authorID)
+            })
+            /**
+             * @name Login
+             * @description Basic strategy to authentication (email & password). */
+            this.post('/api/login', ({ db, authors }, { requestBody }) => {
+                const payload = JSON.parse(requestBody)
+                const author = db.authors.findBy({ username: payload.username })
+                if (author && author.password === payload.password) {
+                    return {
+                        token: '475adab0-13f1-4cfb-bc04-076ff3c07bef',
+                        user: {
+                            username: author.username,
+                            avatar: author.avatar,
+                            description: author.description,
+                        },
+                    }
+                }
+                return new Response(
+                    401,
+                    {},
+                    {
+                        errors: ['Invalid credentials'],
+                    }
+                )
             })
             /**
              * @name Get All Post
