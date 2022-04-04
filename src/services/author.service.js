@@ -26,3 +26,14 @@ export const getProfile = async () => {
         throw new ErrorController('CLIENT', error.message)
     }
 }
+/**
+ * @function
+ * @description Get current user.
+ * @return Author */
+export const authentication = async ({ username, password }) => {
+    return await fetch(`/api/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+    }).then((res) => res.json())
+}
