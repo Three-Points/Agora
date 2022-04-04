@@ -1,3 +1,4 @@
+import Navbar from '@containerComponents/Navbar'
 import Search from '@baseComponents/Search'
 import ListView from '@containerComponents/Listview'
 import { useEffect, useState } from 'react'
@@ -24,6 +25,7 @@ export default () => {
 
     return (
         <>
+            <Navbar />
             <Search handleSearch={searchPosts} />
             <ListView posts={posts} loading={loading} />
         </>

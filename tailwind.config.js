@@ -10,8 +10,19 @@ module.exports = {
                 DEFAULT: '#9BAAAA',
                 soft: '#F2F7F6',
             },
-            red: '#F86A61',
+            red: {
+                dark: '#B2303E',
+                DEFAULT: '#F86A61',
+                light: '#FED3C0',
+            },
+            blue: '#396EB0',
             white: '#FFFFFF',
+            shadow: '#3b425240',
+        },
+        extend: {
+            boxShadow: {
+                DEFAULT: '0px 4px 4px #403B4252',
+            },
         },
     },
     plugins: [

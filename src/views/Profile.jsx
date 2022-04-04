@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import Loader from '@baseComponents/Loader/index'
+import Navbar from '@containerComponents/Navbar'
 import Profile from '@containerComponents/Profile'
 
 import { getProfile } from '@services/author.service'
@@ -16,5 +17,10 @@ export default () => {
         }
     }, [profile])
 
-    return loading ? <Loader /> : <Profile {...profile} />
+    return (
+        <>
+            <Navbar />
+            {loading ? <Loader /> : <Profile profile={profile} />}
+        </>
+    )
 }
